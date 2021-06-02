@@ -5,9 +5,7 @@ class App extends React.Component {
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
     state = {
-      toDo: ["take out the garbage",
-       "do the laundry",
-       "finish homework"],
+      toDo:"",
       
     }
     handleChange = (e)=> {
@@ -16,17 +14,21 @@ class App extends React.Component {
       })
     }
     handleSubmit = (e) => {
-      e.preventDefault();
+      e.preventDefault()
+      this.setState({
+        toDo: e.target.value
+      })
     }
   render() {
     return (<div className = "App">
         <h2>Welcome to your Todo App!</h2>
+        <h1>To Do List</h1>
+        <p>{this.state.value}</p>
       <form onSubmit = {this.handleSubmit}>
-      <input onChange={this.handleChange}/>
-      <button> Enter</button>    
-      <button> Clear To Do List </button>
+        <input placeholder="enter task" onChange={e => this.setState({value: e.target.value})}/>
+        <button onClick={() => this.setState({value: this.state.value})}> Enter</button>    
+        <button> Clear To Do List </button>
       </form>
-      <h2>{this.state.toDo}</h2>
    </div>);
   }
 }
